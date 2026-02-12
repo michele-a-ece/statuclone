@@ -7,3 +7,29 @@
 @source "../../node_modules/statue-ssg/src/**/*.{svelte,js,ts}";
 
 :root { color-scheme: dark; }
+
+/* Custom content blocks (:::type syntax in markdown) */
+.custom-block {
+  --custom-block-accent: #8b8b8b;
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--custom-block-accent);
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: color-mix(in srgb, var(--custom-block-accent) 8%, var(--color-card));
+}
+
+.custom-block-title {
+  font-weight: 600;
+  color: var(--custom-block-accent);
+  margin-bottom: 0.5rem;
+}
+
+.custom-block.note  { --custom-block-accent: #8b8b8b; }
+.custom-block.tip   { --custom-block-accent: #10b981; }
+.custom-block.info  { --custom-block-accent: #3b82f6; }
+.custom-block.warning { --custom-block-accent: #f59e0b; }
+.custom-block.danger  { --custom-block-accent: #ef4444; }
+.custom-block.highlight { --custom-block-accent: var(--color-primary); }
+
+.custom-block > :first-child { margin-top: 0; }
+.custom-block > :last-child  { margin-bottom: 0; }

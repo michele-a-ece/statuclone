@@ -1,22 +1,11 @@
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
-import { mdsvex } from 'mdsvex';
 import path from 'path';
-import rehypeSlug from 'rehype-slug';
-import remarkGfm from 'remark-gfm';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-  extensions: ['.svelte', '.mdx'],
-
-  preprocess: [
-    vitePreprocess(),
-    mdsvex({
-      extensions: ['.mdx'],
-      remarkPlugins: [remarkGfm],
-      rehypePlugins: [rehypeSlug]
-    })
-  ],
+  // Using vitePreprocess for preprocessor
+  preprocess: vitePreprocess(),
 
   kit: {
     // Static site generator
@@ -32,13 +21,17 @@ const config = {
     // Custom alias defined to handle the content folder
     alias: {
       $content: path.resolve('./content'),
-      $lib: path.resolve('./src/lib')
+      $lib: path.resolve('./src/lib'),
+      'statue-ssg/cms/content-processor': path.resolve('./src/lib/cms/content-processor-sync.js')
     },
     
     // Static site pre-processing options
     prerender: {
       crawl: true,
-      entries: ['*'],
+      entries: [
+        '/',
+        '/about'
+      ],
       handleHttpError: 'warn'
     }
   }

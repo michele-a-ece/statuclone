@@ -10,9 +10,8 @@ const __dirname = path.dirname(__filename);
 
 async function generateSEOFiles() {
   try {
-    // Load site config from JSON
-    const configPath = path.join(__dirname, '..', 'site.config.json');
-    const siteConfig = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+    // Import site config
+    const { siteConfig } = await import('../site.config.js');
     
     // Get the site URL from config
     const siteUrl = siteConfig.site.url;
